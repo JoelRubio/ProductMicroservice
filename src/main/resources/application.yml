@@ -1,0 +1,9 @@
+
+spring:
+  application:
+    name: product-service
+  data:
+    mongodb:
+      #uri: mongodb://127.0.0.1:27017/test
+      uri: ${DATASOURCE_MONGODB_URI}
+      database: ${DATASOURCE_MONGODB_DATABASE}

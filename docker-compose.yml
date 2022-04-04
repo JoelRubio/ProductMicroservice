@@ -1,0 +1,20 @@
+version: '3.9'
+services:
+  spring-app:
+    image: product-image
+    build: .
+    environment:
+      - DATASOURCE_MONGODB_URI=mongodb://mongodb:$MONGODB_DOCKER_PORT/$MONGODB_DATABASE 
+      - DATASOURCE_MONGODB_DATABASE=$MONGODB_DATABASE
+    depends_on:
+      - mongodb
+    ports:
+      - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
+  mongodb:
+    image: mongo:4.4.13-focal@sha256:778510ea9bad04e7ebefabd42554c637737c9d0ea3d310a5056a4a0410749f43
+    environment:
+      #- MONGO_INITDB_ROOT_USERNAME=$MONGODB_USERNAME
+      #- MONGO_INITDB_ROOT_PASSWORD=$MONGODB_PASSWORD
+      - MONGO_INITDB_DATABASE=$MONGODB_DATABASE
+    ports:
+      - $MONGODB_LOCAL_PORT:$MONGODB_DOCKER_PORT
